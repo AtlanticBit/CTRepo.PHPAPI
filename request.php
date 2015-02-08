@@ -1,6 +1,7 @@
 <?php
 //server vars
 $debug = false;
+$apiversion = "1.0.0";
 $server = "localhost";
 $user = "3dsclient";
 $password = "test";
@@ -55,7 +56,10 @@ if($_GET["type"] == "search") {
 	}
 //FINISH(for my own dumb brain)
 if($_GET["type"] == "icons") {
-//nope
+	echo "default";
+}
+if($_GET["type"] == "apiversion") {
+	echo apiversion;
 }
 if($debug) {
 print("4");
