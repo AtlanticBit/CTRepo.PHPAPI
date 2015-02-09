@@ -1,2 +1,2 @@
-# CTRepo.PHPAPI
-wow such connection very ctrepo
+# CTRepos PHP API
+Isn't the name obvious?
