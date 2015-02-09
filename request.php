@@ -40,8 +40,10 @@ if($_GET["type"] == "search") {
 	} 
 	//all is set up, now let's send a query
 	$thingtosearch = urldecode($_GET["find"]);
-	$query = "SELECT id, name, shortdesc, iconurl FROM packages WHERE name LIKE '" . $thingtosearch . "'";
-	$result = $conn->query($query);
+	$stmt = $conn->prepare("SELECT id, name, shortdesc, iconurl FROM packages WHERE name LIKE '?'");
+	$stmt->bind_param("s", $thingtosearch);
+	$stmt->execute();
+	
 	//searching
 	if ($result->num_rows > 0) {
     // output data of each row
