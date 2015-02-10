@@ -57,6 +57,7 @@ $conn->close();
             $Result["message"] = 'File '.$FilePath.' is not writable !';       
         }
     }
+}
     function downloadFile ($url, $path) {
 
   $newfname = $path;
