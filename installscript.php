@@ -14,15 +14,15 @@
 		$conn = new mysqli($mysqlserver, $mysqluser, $mysqlpassword);
 // Check connection
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    die("damnit something fucked up: " . $conn->connect_error);
 } 
 
 // Create database
 $sql = $sqltd;
 if ($conn->query($sql) === TRUE) {
-    echo "we won! provided sql done";
+    echo "we won! provided sql done <br />";
 } else {
-    echo "shit, this sucks:" . $conn->error;
+    echo "shit, this sucks: " . $conn->error . "<br />";
 }
 
 $conn->close();
@@ -80,9 +80,9 @@ $conn->close();
   }
  }
  //now do everything in nice order
- 	echo "downloading latest working phpapi... pls wait";
+ 	echo "downloading latest working phpapi... pls wait<br />";
  	downloadFile("https://raw.githubusercontent.com/AtlanticBit/CTRepo.PHPAPI/master/workingphpapi.php", "./request.php");
- 	echo "done, replacing names in downloaded file... pls wait";
+ 	echo "done, replacing names in downloaded file... pls wait<br />";
  	rplc("./request.php", "SERVER", $mysqlserver);
  	rplc("./request.php", "UNAME", $newusrname);
  	rplc("./request.php", "PASS", $newusrpass);
@@ -90,21 +90,21 @@ $conn->close();
  	rplc("./request.php", "FQDN", $repofqdn);
  	rplc("./request.php", "NAME", $reponame);
  	rplc("./request.php", "DESC", $repodesc);
- 	echo "trying to create mysql user pls wait duh...";
+ 	echo "trying to create mysql user pls wait duh...<br />";
  	inssql("CREATE USER " . $newusrname . ";");
- 	echo "trying to set usr pass...";
+ 	echo "trying to set usr pass... <br />";
  	inssql("SET PASSWORD FOR " . $newusrname . " = PASSWORD ('" . $newusrpass . "');");
- 	echo "creating db...";
+ 	echo "creating db... <br />";
  	inssql("CREATE DATABASE " . $newdbname . ";");
- 	echo "adding usr readonly privs...";
+ 	echo "adding usr readonly privs... <br />";
  	inssql("GRANT SELECT ON " . $newdbname .".* TO " . $newusrname . ";");
- 	echo "downloading structure.sql(will be removed later)...";
+ 	echo "downloading structure.sql(will be removed later)...<br />";
  	downloadFile("https://raw.githubusercontent.com/AtlanticBit/CTRepo.PHPAPI/master/workingstructure.sql", "./structure.sql");
- 	echo "replacing strings in structure.sql...";
+ 	echo "replacing strings in structure.sql...<br />";
  	rplc("./structure.sql", "DB2USE", $newdbname);
- 	echo "exec structure.sql...";
+ 	echo "exec structure.sql...<br />";
  	inssql(file_get_contents("./structure.sql"));
- 	echo "autodestruction of installscript in 3....2....1......";
+ 	echo "autodestruction of installscript in 3....2....1...... <br />";
  	unlink("./structure.sql");
  	unlink("./installscript.html");
  	unlink("./installscript.php");
