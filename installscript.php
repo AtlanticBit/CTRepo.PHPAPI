@@ -57,7 +57,7 @@ $conn->close();
             $Result["message"] = 'File '.$FilePath.' is not writable !';       
         }
     }
-    private function downloadFile ($url, $path) {
+    function downloadFile ($url, $path) {
 
   $newfname = $path;
   $file = fopen ($url, "rb");
@@ -88,15 +88,15 @@ $conn->close();
  	rplc("./request.php", "DB", $newdbname);
  	rplc("./request.php", "FQDN", $repofqdn);
  	rplc("./request.php", "NAME", $reponame);
- 	rplc("./request.php", "DESC", $repodesc)
+ 	rplc("./request.php", "DESC", $repodesc);
  	echo "trying to create mysql user pls wait duh...";
  	inssql("CREATE USER " . $newusrname . ";");
- 	echo "trying to set usr pass..."
+ 	echo "trying to set usr pass...";
  	inssql("SET PASSWORD FOR " . $newusrname . " = PASSWORD ('" . $newusrpass . "');");
  	echo "creating db...";
  	inssql("CREATE DATABASE " . $newdbname . ";");
  	echo "adding usr readonly privs..."
- 	inssql("GRANT SELECT ON " . $newdbname .".* TO " . $newusrname . ";")
+ 	inssql("GRANT SELECT ON " . $newdbname .".* TO " . $newusrname . ";");
  	echo "downloading structure.sql(will be removed later)...";
  	downloadFile("https://raw.githubusercontent.com/AtlanticBit/CTRepo.PHPAPI/master/workingstructure.sql", "./structure.sql");
  	echo "replacing strings in structure.sql...";
