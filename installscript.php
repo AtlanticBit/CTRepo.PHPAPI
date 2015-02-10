@@ -95,7 +95,7 @@ $conn->close();
  	inssql("SET PASSWORD FOR " . $newusrname . " = PASSWORD ('" . $newusrpass . "');");
  	echo "creating db...";
  	inssql("CREATE DATABASE " . $newdbname . ";");
- 	echo "adding usr readonly privs..."
+ 	echo "adding usr readonly privs...";
  	inssql("GRANT SELECT ON " . $newdbname .".* TO " . $newusrname . ";");
  	echo "downloading structure.sql(will be removed later)...";
  	downloadFile("https://raw.githubusercontent.com/AtlanticBit/CTRepo.PHPAPI/master/workingstructure.sql", "./structure.sql");
@@ -103,7 +103,7 @@ $conn->close();
  	rplc("./structure.sql", "DB2USE", $newdbname);
  	echo "exec structure.sql...";
  	inssql(file_get_contents("./structure.sql"));
- 	echo "autodestruction of installscript in 3....2....1......"
+ 	echo "autodestruction of installscript in 3....2....1......";
  	unlink("./structure.sql");
  	unlink("./installscript.html");
  	unlink("./installscript.php");
