@@ -1,3 +1,30 @@
 <html>
-
+  <head>
+  	<title>CTRepo Repo Creator Script</title>
+  </head>
+  <body>
+  	<h1>CTRepo Repo Creator Script</h1>
+  	<p>For this script we will need a user that has r/w,create database priviliges and create user priviliges(typically root)<br /> If you don't have one, than you will have to DIY</p>
+  	<form action="installscript.php" method="POST">
+	MySQL Server:<br>
+	<input type="text" name="mysqlserver" value="localhost">
+	MySQL User<br>
+	<input type="text" name="mysqluser" value="root">
+	MySQL Password:<br>
+	<input type="password" name="mysqlpassword" value="">
+	Repo MySQL UserName:<br>
+	<input type="text" name="newusrname" value="3dsrepo">
+	Repo MySQL Password:<br>
+	<input type="text" name="newusrpass" value="localhost">
+	Repo MySQL DB Name<br>
+	<input type="text" name="newdbname" value="3dsrepo">
+	Repo FQDN(Fully Qualified Domain Name):<br>
+	<input type="text" name="repofqdn" value="">
+	Repo Name:<br>
+	<input type="text" name="reponame" value="My Awesome Repo">
+	Repo Description:<br>
+	<input type="text" name="repodesc" value="LOL DEVMENU SUX CTREPO IS BETTER">
+	<input type="submit" value="Work it!">
+  	</form>
+  </body>
 </html>
