@@ -1,7 +1,7 @@
 <?php
 //server vars
 $debug = false;
-$apiversion = APIVER;
+$apiversion = "1.0.0";
 $server = SERVER;
 $user = UNAME;
 $password = PASS;
