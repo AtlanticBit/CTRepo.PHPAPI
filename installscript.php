@@ -24,6 +24,7 @@
 	}
 	function inssql($sqltd)
 	{
+		global $mysqlserver, $mysqluser, $mysqlpassword;
 		$conn = new mysqli($mysqlserver, $mysqluser, $mysqlpassword);
 // Check connection
 if ($conn->connect_error) {
