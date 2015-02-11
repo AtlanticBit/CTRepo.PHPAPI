@@ -115,7 +115,7 @@ $conn->close();
  	echo "downloading structure.sql(will be removed later)...<br />";
  	downloadFile("https://raw.githubusercontent.com/AtlanticBit/CTRepo.PHPAPI/master/workingstructure.sql", "./structure.sql");
  	echo "replacing strings in structure.sql...<br />";
- 	rplc("./structure.sql", "DB2USE","\"" . $newdbname . "\"");
+ 	rplc("./structure.sql", "DB2USE",$newdbname);
  	echo "exec structure.sql...<br />";
  	inssql(file_get_contents("./structure.sql"));
  	echo "autodestruction of installscript in 3....2....1...... <br />";
