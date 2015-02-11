@@ -22,6 +22,23 @@
 	echo $reponame . "<br />";
 	echo $repodesc . "<br />";
 	}
+	public static function deleteDir($dirPath) {
+    if (! is_dir($dirPath)) {
+        throw new InvalidArgumentException("hot damnit this is not a dir lol <br />");
+    }
+    if (substr($dirPath, strlen($dirPath) - 1, 1) != '/') {
+        $dirPath .= '/';
+    }
+    $files = glob($dirPath . '*', GLOB_MARK);
+    foreach ($files as $file) {
+        if (is_dir($file)) {
+            self::deleteDir($file);
+        } else {
+            unlink($file);
+        }
+    }
+    rmdir($dirPath);
+}
 		function multiinssql($sqltd)
 {
 global $mysqlserver, $mysqluser, $mysqlpassword;
@@ -111,16 +128,27 @@ $conn->close();
   }
  }
  //now do everything in nice order
+ 	echo "creating tmp dir...";
+ 	mkdir("./tmp");
  	echo "downloading latest working phpapi... pls wait<br />";
- 	downloadFile("https://raw.githubusercontent.com/AtlanticBit/CTRepo.PHPAPI/master/workingphpapi.php", "./request.php");
+ 	downloadFile("https://raw.githubusercontent.com/AtlanticBit/CTRepo.PHPAPI/master/workingphpapi.zip", "./tmp/download.zip");
+ 	echo "extracting archive....";
+ 	$zip = new ZipArchive;
+	if ($zip->open("./tmp/download.zip") === TRUE) {
+    $zip->extractTo("./");
+    $zip->close();
+    echo "ok<br />";
+	} else {
+    echo "failed<br />";
+	}
  	echo "done, replacing names in downloaded file... pls wait<br />";
- 	rplc("./request.php", "SERVER","\"" . $mysqlserver . "\"");
- 	rplc("./request.php", "UNAME","\"" . $newusrname . "\"");
- 	rplc("./request.php", "PASS","\"" . $newusrpass . "\"");
- 	rplc("./request.php", "DB","\"" . $newdbname . "\"");
- 	rplc("./request.php", "FQDN","\"" .  $repofqdn . "\"");
- 	rplc("./request.php", "NAME","\"" . $reponame . "\"");
- 	rplc("./request.php", "DESC","\"" .  $repodesc . "\"");
+ 	rplc("./config.php", "SERVER","\"" . $mysqlserver . "\"");
+ 	rplc("./config.php", "UNAME","\"" . $newusrname . "\"");
+ 	rplc("./config.php", "PASS","\"" . $newusrpass . "\"");
+ 	rplc("./config.php", "DB","\"" . $newdbname . "\"");
+ 	rplc("./config.php", "FQDN","\"" .  $repofqdn . "\"");
+ 	rplc("./config.php", "NAME","\"" . $reponame . "\"");
+ 	rplc("./config.php", "DESC","\"" .  $repodesc . "\"");
  	echo "trying to create mysql user pls wait duh...<br />";
  	inssql("CREATE USER " . $newusrname . ";");
  	echo "trying to set usr pass... <br />";
@@ -129,8 +157,6 @@ $conn->close();
  	inssql("CREATE DATABASE " . $newdbname . ";");
  	echo "adding usr readonly privs... <br />";
  	inssql("GRANT SELECT ON " . $newdbname .".* TO " . $newusrname . ";");
- 	echo "downloading structure.sql(will be removed later)...<br />";
- 	downloadFile("https://raw.githubusercontent.com/AtlanticBit/CTRepo.PHPAPI/master/workingstructure.sql", "./structure.sql");
  	echo "replacing strings in structure.sql...<br />";
  	rplc("./structure.sql", "DB2USE","`" . $newdbname . "`");
  	echo "exec structure.sql...<br />";
@@ -139,4 +165,5 @@ $conn->close();
  	unlink("./structure.sql");
  	unlink("./installscript.html");
  	unlink("./installscript.php");
+ 	deleteDir("./tmp");
 ?>
