@@ -11,7 +11,7 @@
 	$repodesc = $_POST["repodesc"];
 	//functions to make it all readable duh
 	if($debug) {
-		echo $mysqlserver
+	echo $mysqlserver;
 	echo $mysqluser;
 	echo $mysqlpassword;
 	echo $newusrname;
