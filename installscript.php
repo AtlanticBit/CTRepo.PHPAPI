@@ -1,4 +1,5 @@
 <?php
+	$debug = true;
 	$mysqlserver = $_POST["mysqlserver"];
 	$mysqluser = $_POST["mysqluser"];
 	$mysqlpassword = $_POST["mysqlpassword"];
@@ -9,6 +10,17 @@
 	$reponame = $_POST["reponame"];
 	$repodesc = $_POST["repodesc"];
 	//functions to make it all readable duh
+	if($debug) {
+		echo $mysqlserver
+	echo $mysqluser;
+	echo $mysqlpassword;
+	echo $newusrname;
+	echo $newusrpass;
+	echo $newdbname;
+	echo $repofqdn;
+	echo $reponame;
+	echo $repodesc;
+	}
 	function inssql($sqltd)
 	{
 		$conn = new mysqli($mysqlserver, $mysqluser, $mysqlpassword);
@@ -83,13 +95,13 @@ $conn->close();
  	echo "downloading latest working phpapi... pls wait<br />";
  	downloadFile("https://raw.githubusercontent.com/AtlanticBit/CTRepo.PHPAPI/master/workingphpapi.php", "./request.php");
  	echo "done, replacing names in downloaded file... pls wait<br />";
- 	rplc("./request.php", "SERVER", $mysqlserver);
- 	rplc("./request.php", "UNAME", $newusrname);
- 	rplc("./request.php", "PASS", $newusrpass);
- 	rplc("./request.php", "DB", $newdbname);
- 	rplc("./request.php", "FQDN", $repofqdn);
- 	rplc("./request.php", "NAME", $reponame);
- 	rplc("./request.php", "DESC", $repodesc);
+ 	rplc("./request.php", "SERVER","\"" . $mysqlserver . "\"");
+ 	rplc("./request.php", "UNAME","\"" . $newusrname . "\"");
+ 	rplc("./request.php", "PASS","\"" . $newusrpass . "\"");
+ 	rplc("./request.php", "DB","\"" . $newdbname . "\"");
+ 	rplc("./request.php", "FQDN","\"" .  $repofqdn . "\"");
+ 	rplc("./request.php", "NAME","\"" . $reponame . "\"");
+ 	rplc("./request.php", "DESC","\"" .  $repodesc . "\"");
  	echo "trying to create mysql user pls wait duh...<br />";
  	inssql("CREATE USER " . $newusrname . ";");
  	echo "trying to set usr pass... <br />";
