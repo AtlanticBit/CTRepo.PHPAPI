@@ -1,25 +1,26 @@
 <?php
 	$debug = true;
-	$mysqlserver = $_POST["mysqlserver"];
-	$mysqluser = $_POST["mysqluser"];
-	$mysqlpassword = $_POST["mysqlpassword"];
-	$newusrname = $_POST["newusrname"];
-	$newusrpass = $_POST["newusrpass"];
-	$newdbname = $_POST["newdbname"];
+	global $mysqlserver = $_POST["mysqlserver"];
+	global $mysqluser = $_POST["mysqluser"];
+	global $mysqlpassword = $_POST["mysqlpassword"];
+	global $newusrname = $_POST["newusrname"];
+	global $newusrpass = $_POST["newusrpass"];
+	global $newdbname = $_POST["newdbname"];
 	$repofqdn = $_POST["repofqdn"];
 	$reponame = $_POST["reponame"];
 	$repodesc = $_POST["repodesc"];
 	//functions to make it all readable duh
 	if($debug) {
-	echo $mysqlserver;
-	echo $mysqluser;
-	echo $mysqlpassword;
-	echo $newusrname;
-	echo $newusrpass;
-	echo $newdbname;
-	echo $repofqdn;
-	echo $reponame;
-	echo $repodesc;
+	echo "Data I got: <br />";	
+	echo $mysqlserver . "<br />";
+	echo $mysqluser . "<br />";
+	echo $mysqlpassword . "<br />";
+	echo $newusrname . "<br />";
+	echo $newusrpass . "<br />";
+	echo $newdbname . "<br />";
+	echo $repofqdn . "<br />";
+	echo $reponame . "<br />";
+	echo $repodesc . "<br />";
 	}
 	function inssql($sqltd)
 	{
