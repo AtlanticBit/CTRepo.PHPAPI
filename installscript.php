@@ -1,11 +1,11 @@
 <?php
 	$debug = true;
-	global $mysqlserver = $_POST["mysqlserver"];
-	global $mysqluser = $_POST["mysqluser"];
-	global $mysqlpassword = $_POST["mysqlpassword"];
-	global $newusrname = $_POST["newusrname"];
-	global $newusrpass = $_POST["newusrpass"];
-	global $newdbname = $_POST["newdbname"];
+	$mysqlserver = $_POST["mysqlserver"];
+	$mysqluser = $_POST["mysqluser"];
+	$mysqlpassword = $_POST["mysqlpassword"];
+	$newusrname = $_POST["newusrname"];
+	$newusrpass = $_POST["newusrpass"];
+	$newdbname = $_POST["newdbname"];
 	$repofqdn = $_POST["repofqdn"];
 	$reponame = $_POST["reponame"];
 	$repodesc = $_POST["repodesc"];
