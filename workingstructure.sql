@@ -1,6 +1,5 @@
 USE DB2USE;
 
-DROP TABLE IF EXISTS `packages`;
 CREATE TABLE IF NOT EXISTS `packages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` text NOT NULL,
