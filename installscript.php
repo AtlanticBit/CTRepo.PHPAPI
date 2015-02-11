@@ -1,5 +1,5 @@
 <?php
-	$debug = true;
+	$debug = false;
 	$mysqlserver = $_POST["mysqlserver"];
 	$mysqluser = $_POST["mysqluser"];
 	$mysqlpassword = $_POST["mysqlpassword"];
