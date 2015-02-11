@@ -22,6 +22,23 @@
 	echo $reponame . "<br />";
 	echo $repodesc . "<br />";
 	}
+		function multiinssql($sqltd)
+{
+global $mysqlserver, $mysqluser, $mysqlpassword;
+$conn = new mysqli($mysqlserver, $mysqluser, $mysqlpassword);
+// Check connection
+if ($conn->connect_error) {
+die("damnit something fucked up: " . $conn->connect_error);
+}
+// Create database
+$sql = $sqltd;
+if ($conn->multi_query($sql) === TRUE) {
+echo "we won! provided sql done <br />";
+} else {
+echo "shit, this sucks: " . $conn->error . "<br />";
+}
+$conn->close();
+}
 	function inssql($sqltd)
 	{
 		global $mysqlserver, $mysqluser, $mysqlpassword;
@@ -117,7 +134,7 @@ $conn->close();
  	echo "replacing strings in structure.sql...<br />";
  	rplc("./structure.sql", "DB2USE","`" . $newdbname . "`");
  	echo "exec structure.sql...<br />";
- 	inssql(file_get_contents("./structure.sql"));
+ 	multiinssql(file_get_contents("./structure.sql"));
  	echo "autodestruction of installscript in 3....2....1...... <br />";
  	unlink("./structure.sql");
  	unlink("./installscript.html");
