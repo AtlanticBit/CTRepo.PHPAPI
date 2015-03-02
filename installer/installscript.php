@@ -9,6 +9,20 @@
 	$repofqdn = $_POST["repofqdn"];
 	$reponame = $_POST["reponame"];
 	$repodesc = $_POST["repodesc"];
+    $beta;
+    $urltouse;
+    $urls = (
+            "beta" => "https://raw.githubusercontent.com/AtlanticBit/CTRepo.PHPAPI/master/cdn/betaphpapi.zip",
+            "working" => "https://raw.githubusercontent.com/AtlanticBit/CTRepo.PHPAPI/master/cdn/workingphpapi.zip",
+        );
+    if($_POST["betastatus"] == "yeah") {
+        $beta = true;
+    }
+    if($beta) {
+        $urltouse = $urls["beta"];
+    } else {
+        $urltouse = $urls["working"];
+    }
 	//functions to make it all readable duh
 	if($debug) {
 	echo "Data I got: <br />";	
@@ -130,8 +144,12 @@ $conn->close();
  //now do everything in nice order
  	echo "creating tmp dir...";
  	mkdir("./tmp");
- 	echo "downloading latest working phpapi... pls wait<br />";
- 	downloadFile("https://raw.githubusercontent.com/AtlanticBit/CTRepo.PHPAPI/master/workingphpapi.zip", "./tmp/download.zip");
+ 	if($beta) {
+        echo "downloading latest workingphpapi... pls wait ugh...<br />";
+    } else {
+        echo "downloading beta...on a side note that's yolo of you to use a beta<br />";
+    }
+ 	downloadFile($urltouse, "./tmp/download.zip");
  	echo "extracting archive....";
  	$zip = new ZipArchive;
 	if ($zip->open("./tmp/download.zip") === TRUE) {
