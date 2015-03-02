@@ -31,7 +31,7 @@ if($_GET["type"] == "search") {
     die("/error/" . $conn->connect_error);
 	} 
 	//all is set up, now let's send a query
-	$thingtosearch = urldecode($_GET["find"]);
+	$thingtosearch = $conn->real_escape_string(urldecode($_GET["find"]));
 	$query = "SELECT id, name, shortdesc, iconurl FROM packages WHERE name LIKE '" . $thingtosearch . "'";
 	$result = $conn->query($query);
 	//searching
@@ -52,6 +52,9 @@ if($_GET["type"] == "icons") {
 }
 if($_GET["type"] == "apiversion") {
 	echo apiversion;
+}
+if($_GET["type"] == "3dscfw") {
+	echo ""
 }
 if($debug) {
 print("4");
