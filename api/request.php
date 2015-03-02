@@ -53,8 +53,8 @@ if($_GET["type"] == "icons") {
 if($_GET["type"] == "apiversion") {
 	echo apiversion;
 }
-if($_GET["type"] == "3dscfw") {
-	echo ""
+if($_GET["type"] == "") {
+	echo "";
 }
 if($debug) {
 print("4");
