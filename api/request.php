@@ -1,6 +1,10 @@
 <?php
 //server vars
 include "config.php";
+if($_GET["type"] == "internal") {
+	if(true) {
+	}
+}
 //dbconn open
 if($debug) {
 print("1");
@@ -47,6 +51,10 @@ if($_GET["type"] == "search") {
 	$conn->close();
 	}
 //FINISH(for my own dumb brain)
+if($_GET["type"] == "downloadciabyid") {
+	//this should be only called by ctrepo
+	
+}
 if($_GET["type"] == "icons") {
 	echo "default";
 }
