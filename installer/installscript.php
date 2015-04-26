@@ -9,6 +9,9 @@
 	$repofqdn = $_POST["repofqdn"];
 	$reponame = $_POST["reponame"];
 	$repodesc = $_POST["repodesc"];
+	$directoryofrepomanager = $_POST["repomgr"];
+	$repomanagerlogin = $_POST["mgrlogin"];
+	$repomanagerpass = password_hash($_POST["mgrpass"]);
     $beta;
     $urltouse;
     $urls = (
@@ -17,7 +20,9 @@
         );
     if($_POST["betastatus"] == "yeah") {
         $beta = true;
-    }
+    } else {
+		$beta = true;
+	}
     if($beta) {
         $urltouse = $urls["beta"];
     } else {
@@ -179,6 +184,7 @@ $conn->close();
  	rplc("./structure.sql", "DB2USE","`" . $newdbname . "`");
  	echo "exec structure.sql...<br />";
  	multiinssql(file_get_contents("./structure.sql"));
+	echo "installing our lovely repo manager in the directory you choosen...<br />";
  	echo "autodestruction of installscript in 3....2....1...... <br />";
  	unlink("./structure.sql");
  	unlink("./installscript.html");
