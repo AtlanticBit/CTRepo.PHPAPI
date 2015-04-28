@@ -3,6 +3,7 @@
 include "config.php";
 if($_GET["type"] == "internal") {
 	if(true) {
+
 	}
 }
 //dbconn open
@@ -53,7 +54,28 @@ if($_GET["type"] == "search") {
 //FINISH(for my own dumb brain)
 if($_GET["type"] == "downloadciabyid") {
 	//this should be only called by ctrepo
-	
+	//getting ready to mysqli
+	mysql_close();
+	//starting mysqli
+	$conn = new mysqli($server, $user, $password, $database);
+	if ($conn->connect_error) {
+    die("/error/" . $conn->connect_error);
+	} 
+	//all is set up, now let's send a query
+	$thingtosearch = $conn->real_escape_string(urldecode($_GET["find"]));
+	$query = "SELECT urltopkg FROM packages WHERE id LIKE '" . $thingtosearch . "'";
+	$result = $conn->query($query);
+	//searching
+	if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        echo $row["urltopkg"];
+    }
+	} else {
+    	echo "/wtf/";
+	}
+	//goodbye mysqli ;-; you will be missed
+	$conn->close();
 }
 if($_GET["type"] == "icons") {
 	echo "default";

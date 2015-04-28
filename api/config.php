@@ -8,4 +8,6 @@ $database = "3dsrepo";
 $repofqdn = "brunoturek.com";
 $reponame = "Bruno Turek's Repo";
 $repodesc = "Best repo in the world!";
+$repomanagerlogin = "Atlantic";
+$repomanagerpassword = "CENS0R3D";
 ?>
